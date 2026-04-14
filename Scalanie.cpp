@@ -1,47 +1,46 @@
 #include <iostream>
 using namespace std;
 
-int tabPomocnicza[100];
+int pomoc[100];
 
 void Merge(int tab[], int lewy, int srodek, int prawy)
 {
-    int indeksLewej = lewy;
-    int indeksPrawej = srodek + 1;
-    int indeksPomocniczy = lewy;
+    int i = lewy;
+    int j = srodek + 1;
+    int k = lewy;
 
-    while (indeksLewej <= srodek && indeksPrawej <= prawy)
+    while (i <= srodek && j <= prawy)
     {
-        if (tab[indeksLewej] <= tab[indeksPrawej])
+        if (tab[i] <= tab[j])
         {
-            tabPomocnicza[indeksPomocniczy] = tab[indeksLewej];
-            indeksLewej++;
+            pomoc[k] = tab[i];
+            i++;
         }
         else
         {
-            tabPomocnicza[indeksPomocniczy] = tab[indeksPrawej];
-            indeksPrawej++;
+            pomoc[k] = tab[j];
+            j++;
         }
-
-        indeksPomocniczy++;
+        k++;
     }
 
-    while (indeksLewej <= srodek)
+    while (i <= srodek)
     {
-        tabPomocnicza[indeksPomocniczy] = tab[indeksLewej];
-        indeksLewej++;
-        indeksPomocniczy++;
+        pomoc[k] = tab[i];
+        i++;
+        k++;
     }
 
-    while (indeksPrawej <= prawy)
+    while (j <= prawy)
     {
-        tabPomocnicza[indeksPomocniczy] = tab[indeksPrawej];
-        indeksPrawej++;
-        indeksPomocniczy++;
+        pomoc[k] = tab[j];
+        j++;
+        k++;
     }
 
-    for (int indeks = lewy; indeks <= prawy; indeks++)
+    for (int i = lewy; i <= prawy; i++)
     {
-        tab[indeks] = tabPomocnicza[indeks];
+        tab[i] = pomoc[i];
     }
 }
 
@@ -59,32 +58,32 @@ void MergeSort(int tab[], int lewy, int prawy)
 
 int main()
 {
-    int liczbaElementow;
+    int n;
     int tab[100];
 
     cout << "Podaj liczbe elementow: ";
-    cin >> liczbaElementow;
+    cin >> n;
 
-    for (int indeks = 0; indeks < liczbaElementow; indeks++)
+    for (int i = 0; i < n; i++)
     {
-        cout << "Podaj element " << indeks + 1 << ": ";
-        cin >> tab[indeks];
+        cout << "Podaj element " << i + 1 << ": ";
+        cin >> tab[i];
     }
 
     cout << endl;
     cout << "Tablica przed sortowaniem:" << endl;
-    for (int indeks = 0; indeks < liczbaElementow; indeks++)
+    for (int i = 0; i < n; i++)
     {
-        cout << tab[indeks] << " ";
+        cout << tab[i] << " ";
     }
 
-    MergeSort(tab, 0, liczbaElementow - 1);
+    MergeSort(tab, 0, n - 1);
 
     cout << endl;
     cout << "Tablica po sortowaniu:" << endl;
-    for (int indeks = 0; indeks < liczbaElementow; indeks++)
+    for (int i = 0; i < n; i++)
     {
-        cout << tab[indeks] << " ";
+        cout << tab[i] << " ";
     }
 
     return 0;
